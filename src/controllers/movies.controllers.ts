@@ -42,5 +42,5 @@ export const deleteMovieController = async (
   const idMovie: number = Number(request.params.id);
   await deleteMovieService(idMovie);
 
-  return response.status(209).json();
+  return response.status(204).json();
 };
