@@ -14,7 +14,7 @@ export const updateMovieService = async (
   await movieRepository.update(movieId, { ...movieData });
   
   const movie = await movieRepository.findOne({ where: { id: movieId } });
-  
+
   const returnMovie: TMovieResponse = movieSchema.parse(movie);
 
   return returnMovie;
