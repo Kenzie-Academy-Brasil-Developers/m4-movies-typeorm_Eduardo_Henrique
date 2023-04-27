@@ -10,6 +10,10 @@ export const ensureExistsName = async (
   next: NextFunction
 ) => {
   const nameMovie = request.body.name;
+  if (!nameMovie) {
+    return next();
+  }
+  
   const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
 
   const movie = await movieRepository.findOne({ where: { name: nameMovie } });
