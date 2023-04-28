@@ -45,15 +45,17 @@ export const listAllMoviesService = async (
 
   const returnMovies: TMoviesResponse = responseMoviesSchema.parse(movies);
 
+  const totalCount = await movieRepository.count();
+  const totalPages =  Math.ceil(totalCount / perPage)
+  
   let nextPage:string | null = null
   let prevPage:string | null = null
-  const totalCount = await movieRepository.count();
-  
+
   if(page > 1){
     prevPage = `http://localhost:3000/movies?page=${page - 1}&perPage=${perPage}`
   }
 
-  if (page < Math.ceil(totalCount / perPage)) {
+  if (page < totalPages) {
     nextPage = `http://localhost:3000/movies?page=${page + 1}&perPage=${perPage}`;
   }
 
